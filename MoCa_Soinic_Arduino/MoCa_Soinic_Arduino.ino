@@ -1,8 +1,8 @@
 #include "Sonar.h"
 #define SONAR_PAIR_NUMBER 1
-#define TOLERANCE 100
-#define DELTA 10
-#define MOVE_COUNT_LIMIT 5
+#define TOLERANCE 50
+#define DELTA 5
+#define MOVE_COUNT_LIMIT 3
 
 Sonar sonarPairs[SONAR_PAIR_NUMBER][2] = {
     {Sonar(8, 9), Sonar(11, 10)}
@@ -22,6 +22,7 @@ void setup() {
 
 void loop() {
     updateStatus();
+    delay(100);
 //    delay(2);
 //    for (byte i = 0; i < SONAR_PAIR_NUMBER; i++) {
 //        newDistances[i] = getDistanceOf(i, isComing[i]);
@@ -52,10 +53,10 @@ void updateStatus() {
             moveCounts[i] = 0;
             return;
         }
-        Serial.print("    ");
-        Serial.print(delta);
-        Serial.print("   ");
-        Serial.print(isComing[i] ? "Coming" : "Leaving");
+//        Serial.print("    ");
+//        Serial.print(delta);
+//        Serial.print("   ");
+//        Serial.print(isComing[i] ? "Coming" : "Leaving");
 //        if (delta > DELTA) {
 //            if (isComing[i] && (newDistances[i] < pastDistances[i])) {
 ////                Serial.println("is coming");
@@ -88,7 +89,7 @@ void updateStatus() {
             moveCounts[i] = 0;
             delay(1000);
         }
-        Serial.println(moveCounts[i]);
+//        Serial.println(moveCounts[i]);
     }
 }
 

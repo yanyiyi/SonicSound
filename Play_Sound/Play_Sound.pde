@@ -6,7 +6,7 @@ SoundFile windSound01,windSound02,windSound03,windSound04,windSound05;
 
 
 // Sensor
-int iLight_Counts = 2 ; // how many sensor
+int iLight_Counts = 1 ; // how many sensor
 int[] iLight_Vals = new int[iLight_Counts]; // storage sensor
 String nowStat ;
 int lf = 10 ;
@@ -17,12 +17,26 @@ int lf = 10 ;
 void setup() {
 
  // Start arduino
-  //port = new Serial( this, Serial.list()[5], 9600 );
+  port = new Serial( this, Serial.list()[0], 9600 );
   size(1024, 768);
   noStroke();
 }
 
 void draw() {
+  if ( port.available() > 0 ) {
+    nowStat = port.readStringUntil( 10 ) ;
+    if ( nowStat != null ) {
+      print( "\n Receiving:" + nowStat ) ;        
+      iLight_Vals = int( splitTokens( nowStat, "," ) ) ;
+      for (int i = 0; i < iLight_Counts; i++) {
+        if (Integer.parseInt(nowStat.trim()) == 11) {
+          (new SoundFile(this, "frog01.wav")).play();
+        } else {
+          (new SoundFile(this, "frog03.wav")).play();
+        }
+      }
+    }
+  }
     //if ( 0 < port.available() ) {
     //      nowStat = port.readStringUntil( lf ) ;
     //            if ( nowStat != null ) {
@@ -60,6 +74,9 @@ void draw() {
 
 
 void keyPressed() {
+  if (key == 'a') {
+    randomSound(0);
+  }
    if (key == 'b' || key == 'B') {
 randomSound(1);
      }
@@ -79,6 +96,9 @@ randomSound(5);
 
 
 void randomSound(int i){
+  if (i == 0) {
+    (new SoundFile(this, "frog01.wav")).play();
+  }
   if(i == 1){
       windSound01 = new SoundFile(this, "w0"+int(random(1,6))+".wav");
       windSound01.play();
