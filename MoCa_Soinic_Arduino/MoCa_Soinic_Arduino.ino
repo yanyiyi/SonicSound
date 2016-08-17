@@ -3,6 +3,7 @@
 #define ECHO_PIN     9
 #define TRIGGER_PIN2  12
 #define ECHO_PIN2     11
+
 Ultrasonic ultrasonic(TRIGGER_PIN, ECHO_PIN);
 Ultrasonic ultrasonic2(TRIGGER_PIN2, ECHO_PIN2);
 
@@ -38,7 +39,7 @@ void loop() {
    Serial.print(cmN);
      Serial.print(",");
       Serial.print(cmN2);
-     Serial.print(",");
-     Serial.println("0");
+     Serial.println(",");
+     
 }
 
