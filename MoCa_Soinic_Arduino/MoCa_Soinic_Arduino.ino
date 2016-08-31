@@ -1,9 +1,20 @@
+// Include definition of "Sonar class"
 #include "Sonar.h"
+// Using number of sonar pairs
 #define SONAR_PAIR_NUMBER 1
+
 #define TOLERANCE 50
 #define DELTA 5
 #define MOVE_COUNT_LIMIT 3
 
+#define DEBUG
+
+/* Sonar detector pair array
+ *  Used to store "Sonar pairs"
+ *  "Sonar pairs" is a array of two object of "Sonar class"
+ *  Firts is for comming detection
+ *  Last is for leaving detection
+ */
 Sonar sonarPairs[SONAR_PAIR_NUMBER][2] = {
     {Sonar(8, 9), Sonar(11, 10)}
 };
@@ -27,8 +38,8 @@ void loop() {
 
 int getDistanceOf(byte sonarPairNo, bool isComing) {
     return isComing ?
-            sonarPairs[sonarPairNo][0].ranging() :
-            sonarPairs[sonarPairNo][1].ranging();
+            sonarPairs[sonarPairNo][0].update() -> getDistance() :
+            sonarPairs[sonarPairNo][1].update() -> getDistance();
 }
 
 void updateStatus() {
@@ -36,19 +47,25 @@ void updateStatus() {
         newDistances[i] = getDistanceOf(i, isComing[i]);
         int delta = abs(newDistances[i] - pastDistances[i]);
         if (delta > TOLERANCE) {
-//            Serial.println("reset");
+#ifdef DEBUG
+            Serial.println("reset");
+#endif
             pastDistances[i] = newDistances[i];
             moveCounts[i] = 0;
             return;
         }
         if (isComing[i]) {
-//            Serial.println("is coming");
+#ifdef DEBUG
+            Serial.println("is coming");
+#endif
             if ( (newDistances[i] < pastDistances[i]) && (delta > DELTA) ) {
                 moveCounts[i]++;
                 pastDistances[i] = newDistances[i];
             }
         } else {
-//            Serial.println("is leaving");
+#ifdef DEBUG
+            Serial.println("is leaving");
+#endif
             if ( (newDistances[i] > pastDistances[i]) && (delta > DELTA) ) {
                 moveCounts[i]++;
                 pastDistances[i] = newDistances[i];
@@ -60,7 +77,9 @@ void updateStatus() {
             moveCounts[i] = 0;
             delay(1000);
         }
-//        Serial.println(moveCounts[i]);
+#ifdef DEBUG
+        Serial.println(moveCounts[i]);
+#endif
     }
 }
 
