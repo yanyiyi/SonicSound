@@ -23,18 +23,6 @@ void setup() {
 void loop() {
     updateStatus();
     delay(100);
-//    delay(2);
-//    for (byte i = 0; i < SONAR_PAIR_NUMBER; i++) {
-//        newDistances[i] = getDistanceOf(i, isComing[i]);
-//        Serial.print(newDistances[i]);
-//        Serial.print(",");
-//    } Serial.println();
-//    for (byte i = 0; i < SONAR_PAIR_NUMBER; i++) {
-//        for (byte j = 0; j < 2; j++) {
-//            Serial.print(sonarPairs[i][j].ranging());
-//            Serial.print(",");
-//        } Serial.println();
-//    }
 }
 
 int getDistanceOf(byte sonarPairNo, bool isComing) {
@@ -53,23 +41,6 @@ void updateStatus() {
             moveCounts[i] = 0;
             return;
         }
-//        Serial.print("    ");
-//        Serial.print(delta);
-//        Serial.print("   ");
-//        Serial.print(isComing[i] ? "Coming" : "Leaving");
-//        if (delta > DELTA) {
-//            if (isComing[i] && (newDistances[i] < pastDistances[i])) {
-////                Serial.println("is coming");
-//                moveCounts[i]++;
-//            }
-//            else if (!isComing[i] && (newDistances[i] > pastDistances[i])) {
-////                Serial.println("is leaving");
-//                moveCounts[i]++;
-//            }
-////            else
-////                moveCounts[i] = 0;
-////            pastDistances[i] = newDistances[i];
-//        }
         if (isComing[i]) {
 //            Serial.println("is coming");
             if ( (newDistances[i] < pastDistances[i]) && (delta > DELTA) ) {
