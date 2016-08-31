@@ -33,7 +33,9 @@ void setup() {
 
 void loop() {
     updateStatus();
+
     delay(100);
+
 }
 
 int getDistanceOf(byte sonarPairNo, bool isComing) {
