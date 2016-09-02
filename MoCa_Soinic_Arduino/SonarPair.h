@@ -7,7 +7,6 @@ class SonarPair {
         const byte MOVE_COUNT_LIMIT = 3;
         
         Sonar comingSonar, leavingSonar;
-        Sonar* sonar;
         int pastDistance;
         int newDistance;
         bool isComing;
@@ -19,7 +18,6 @@ class SonarPair {
                         leavingSonar(leavingTriggerPin, leavingEchoPin) {
             isComing = true;
             moveCount = 0;
-            sonar = &comingSonar;
             pastDistance = getDistance();
         }
         void update() {
