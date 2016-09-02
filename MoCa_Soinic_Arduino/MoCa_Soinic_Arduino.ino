@@ -18,11 +18,11 @@ void setup() {
 }
 
 void loop() {
-    updateSonarPairs();
-    delay(100);
+    updateSensors();
+    delay(200);
 }
 
-void updateSonarPairs() {
+void updateSensors() {
     for (byte i = 0; i < PAIR_NUMBER; i++) {
         sonarPairs[i].update();
     }
