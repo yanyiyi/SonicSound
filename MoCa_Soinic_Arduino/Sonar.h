@@ -37,4 +37,7 @@ class Sonar
         int getDistance() {
             return (int)(duration / 28.5 / 2);
         }
+        byte getID() {
+            return triggerPin;
+        }
 };
