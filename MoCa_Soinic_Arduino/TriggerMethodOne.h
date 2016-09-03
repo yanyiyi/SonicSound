@@ -1,54 +1,91 @@
-#include "TriggerMethod.h"
+#ifndef TRIGGER_METHOD_ONE_H
+#define TRIGGER_METHOD_ONE_H
 
-class TriggerMethodOne : private TriggerMethod
+#include "TriggerMethod.h"
+#include "Sonar.h"
+
+class TriggerMethodOne : public TriggerMethod
 {
     private:
-        const long TOLERANCE = 50;
-        const long DELTA = 5;
-        const byte MOVE_COUNT_LIMIT = 3;
+        const int TOLERANCE = 50;
+        const byte OUTRANGE_LIMIT = 20;
+        const int DELTA = 3;
+        const byte MOVE_COUNT_LIMIT = 10;
 
+        Sonar *comingSensor, *leavingSensor;
+        bool isComing;
         int pastDistance;
+        byte outRangeCount;
         byte moveCount;
 
+        void initDistance(Sonar* sensor) {
+            pastDistance = sensor -> update() -> getDistance();
+        }
+        
     public:
-        TriggerMethodOne(int initData) : TriggerMethod() {
-            pastDistance = initData;
+        TriggerMethodOne(Sonar* comingSensor, Sonar* leavingSensor) :
+                TriggerMethod() {
+            this->comingSensor = comingSensor;
+            this->leavingSensor = leavingSensor;
+            reset();
+        }
+
+        void update() {
+            if (isTrigger) return;
+            
+            int newDistance = isComing ?
+                    comingSensor -> update() -> getDistance() :
+                    leavingSensor -> update() -> getDistance();
+            int delta = abs(newDistance - pastDistance);
+            
+            if (delta > TOLERANCE) {
+                if (outRangeCount++ < OUTRANGE_LIMIT) return;
+                Serial.println("reset");
+                pastDistance = newDistance;
+                moveCount = 0;
+                return;
+            } outRangeCount = 0;
+            
+            if (isComing) {
+                Serial.print("is coming ");
+                if ( (newDistance < pastDistance) && (delta > DELTA) ) {
+                    moveCount++;
+                    pastDistance = newDistance;
+                }
+            } else {
+                Serial.print("is leaving ");
+                if ( (newDistance > pastDistance) && (delta > DELTA) ) {
+                    moveCount++;
+                    pastDistance = newDistance;
+                }
+            }
+            
+            if (moveCount > MOVE_COUNT_LIMIT) {
+                isTrigger = true;
+            }
+            
+            Serial.println(moveCount);
+        }
+
+        void toggle() {
+            isTrigger = false;
+            isComing = !isComing;
+            initDistance(isComing ? comingSensor : leavingSensor);
+            outRangeCount = 0;
             moveCount = 0;
         }
 
-        void update(int data) {
-            int delta = abs(data - pastDistance);
-            if (delta > TOLERANCE) {
-                Serial.println("reset");
-                pastDistance = data;
-                moveCount = 0;
-                return;
-            }
-            if (isComing) {
-                Serial.println("is coming");
-                if ( (data < pastDistance) && (delta > DELTA) ) {
-                    moveCount++;
-                    pastDistance = data;
-                }
-            } else {
-                Serial.println("is leaving");
-                if ( (data > pastDistance) && (delta > DELTA) ) {
-                    moveCount++;
-                    pastDistance = data;
-                }
-            }
-            if (moveCount > MOVE_COUNT_LIMIT) {
-                if (isComing) {
-                    Serial.println(comingSonar.getID());
-                } else {
-                    Serial.println(leavingSonar.getID());
-                }
-                isComing = !isComing;
-                moveCount = 0;
-                delay(1000);
-            }
-            Serial.println(moveCount);
+        void reset() {
+            isTrigger = false;
+            isComing = true;
+            initDistance(comingSensor);
+            moveCount = 0;
         }
-        bool isTrigger()
-}
 
+        byte getID() {
+            return isComing ? comingSensor -> getTriggerPin() :
+                            leavingSensor -> getTriggerPin();
+        }
+};
+
+#endif

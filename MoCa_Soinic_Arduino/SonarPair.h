@@ -1,3 +1,6 @@
+#ifndef SONAR_PAIR_H
+#define SONAR_PAIR_H
+
 #include "Sonar.h"
 
 class SonarPair {
@@ -48,9 +51,9 @@ class SonarPair {
             }
             if (moveCount > MOVE_COUNT_LIMIT) {
                 if (isComing) {
-                    Serial.println(comingSonar.getID());
+                    Serial.println(comingSonar.getTriggerPin());
                 } else {
-                    Serial.println(leavingSonar.getID());
+                    Serial.println(leavingSonar.getTriggerPin());
                 }
                 isComing = !isComing;
                 moveCount = 0;
@@ -64,3 +67,5 @@ class SonarPair {
                 leavingSonar.update() -> getDistance();
         }
 };
+
+#endif

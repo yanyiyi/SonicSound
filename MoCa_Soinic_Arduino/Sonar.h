@@ -1,3 +1,6 @@
+#ifndef SONAR_H
+#define SONAR_H
+
 class Sonar
 {
     private:
@@ -13,7 +16,7 @@ class Sonar
         }
         void detect() {
             digitalWrite(triggerPin, LOW);
-            delayMicroseconds(2);
+            delayMicroseconds(5);
             digitalWrite(triggerPin, HIGH);
             delayMicroseconds(10);
             digitalWrite(triggerPin, LOW);
@@ -21,7 +24,7 @@ class Sonar
         }
     public:
         Sonar(byte triggerPin, byte echoPin) {
-            this->init(triggerPin, echoPin, 30000);
+            this->init(triggerPin, echoPin, 20000);
             // 3000 µs = 50cm // 30000 µs = 5 m
         }
         Sonar(byte triggerPin, byte echoPin, unsigned long timeOut) {
@@ -37,7 +40,12 @@ class Sonar
         int getDistance() {
             return (int)(duration / 28.5 / 2);
         }
-        byte getID() {
+        byte getTriggerPin() {
             return triggerPin;
         }
+        byte getEchoPin() {
+            return echoPin;
+        }
 };
+
+#endif

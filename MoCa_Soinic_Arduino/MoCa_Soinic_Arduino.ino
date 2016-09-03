@@ -1,5 +1,7 @@
 // Include definition of "SonarPair class"
-#include "SonarPair.h"
+#include "Sonar.h"
+#include "TriggerMethod.h"
+#include "TriggerMethodOne.h"
 // Using number of sonar pairs
 #define PAIR_NUMBER 1
 
@@ -9,8 +11,9 @@
  *  Firts is for comming detection
  *  Last is for leaving detection
  */
-SonarPair sonarPairs[PAIR_NUMBER] = {
-    SonarPair(8, 9, 11, 10)
+ 
+TriggerMethod* triggerMethods[PAIR_NUMBER] = {
+    new TriggerMethodOne(new Sonar(8, 9), new Sonar(11, 10))
 };
 
 void setup() {
@@ -19,12 +22,18 @@ void setup() {
 
 void loop() {
     updateSensors();
-    delay(200);
+    //delay(1);
 }
 
 void updateSensors() {
     for (byte i = 0; i < PAIR_NUMBER; i++) {
-        sonarPairs[i].update();
+        triggerMethods[i] -> update();
+        if (triggerMethods[i] -> isTrigger) {
+            Serial.print(triggerMethods[i] -> getID());
+            triggerMethods[i] -> toggle();
+            Serial.println("    reset");
+            delay(1000);
+        }
     }
 }
 
