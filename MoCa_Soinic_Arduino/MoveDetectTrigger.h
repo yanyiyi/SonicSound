@@ -1,10 +1,10 @@
 #ifndef TRIGGER_METHOD_ONE_H
 #define TRIGGER_METHOD_ONE_H
 
-#include "TriggerMethod.h"
+#include "SonarPairDetectTriggerInterface.h"
 #include "Sonar.h"
 
-class TriggerMethodOne : public TriggerMethod
+class MoveDetectTrigger : public SonarPairDetectTriggerInterface
 {
     private:
         const int TOLERANCE = 50;
@@ -12,30 +12,30 @@ class TriggerMethodOne : public TriggerMethod
         const int DELTA = 3;
         const byte MOVE_COUNT_LIMIT = 10;
 
-        Sonar *comingSensor, *leavingSensor;
-        bool isComing;
+        Sonar *frontSonar, *backSonar;
+        bool _isTrigger;
+        bool isToggle;
         int pastDistance;
         byte outRangeCount;
         byte moveCount;
 
-        void initDistance(Sonar* sensor) {
-            pastDistance = sensor -> update() -> getDistance();
+        void initDistance(Sonar* sonar) {
+            pastDistance = sonar -> detect() -> getDistance();
         }
         
     public:
-        TriggerMethodOne(Sonar* comingSensor, Sonar* leavingSensor) :
-                TriggerMethod() {
-            this->comingSensor = comingSensor;
-            this->leavingSensor = leavingSensor;
+        MoveDetectTrigger(Sonar* frontSonar, Sonar* backSonar) {
+            this->frontSonar = frontSonar;
+            this->backSonar = backSonar;
             reset();
         }
 
-        void update() {
-            if (isTrigger) return;
+        void detect() {
+            if (_isTrigger) return;
             
-            int newDistance = isComing ?
-                    comingSensor -> update() -> getDistance() :
-                    leavingSensor -> update() -> getDistance();
+            int newDistance = isToggle ?
+                    frontSonar -> detect() -> getDistance() :
+                    backSonar -> detect() -> getDistance();
             int delta = abs(newDistance - pastDistance);
             
             if (delta > TOLERANCE) {
@@ -46,7 +46,7 @@ class TriggerMethodOne : public TriggerMethod
                 return;
             } outRangeCount = 0;
             
-            if (isComing) {
+            if (isToggle) {
                 Serial.print("is coming ");
                 if ( (newDistance < pastDistance) && (delta > DELTA) ) {
                     moveCount++;
@@ -61,30 +61,35 @@ class TriggerMethodOne : public TriggerMethod
             }
             
             if (moveCount > MOVE_COUNT_LIMIT) {
-                isTrigger = true;
+                _isTrigger = true;
             }
             
             Serial.println(moveCount);
         }
 
+        bool isTrigger() {
+            return _isTrigger;
+        }
+
         void toggle() {
-            isTrigger = false;
-            isComing = !isComing;
-            initDistance(isComing ? comingSensor : leavingSensor);
+            _isTrigger = false;
+            isToggle = !isToggle;
+            initDistance(isToggle ? frontSonar : backSonar);
             outRangeCount = 0;
             moveCount = 0;
         }
 
         void reset() {
-            isTrigger = false;
-            isComing = true;
-            initDistance(comingSensor);
+            _isTrigger = false;
+            isToggle = true;
+            initDistance(frontSonar);
+            outRangeCount = 0;
             moveCount = 0;
         }
 
         byte getID() {
-            return isComing ? comingSensor -> getTriggerPin() :
-                            leavingSensor -> getTriggerPin();
+            return isToggle ? frontSonar -> getTriggerPin() :
+                            backSonar -> getTriggerPin();
         }
 };
 
