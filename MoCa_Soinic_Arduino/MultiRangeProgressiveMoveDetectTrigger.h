@@ -1,10 +1,10 @@
-#ifndef TRIGGER_METHOD_TWO_H
-#define TRIGGER_METHOD_TWO_H
+#ifndef MULTI_RANGE_PROGRESSIVE_MOVE_DETECT_TRIGGER_H
+#define MULTI_RANGE_PROGRESSIVE_MOVE_DETECT_TRIGGER_H
 
-#include "TriggerMethod.h"
+#include "SonarPairDetectTriggerInterface.h"
 #include "Sonar.h"
 
-class TriggerMethodTwo : public TriggerMethod
+class MultiRangeProgressiveMoveDetectTrigger : public SonarPairDetectTriggerInterface
 {
     private:
         const int MIN_DISTANCE = 50;

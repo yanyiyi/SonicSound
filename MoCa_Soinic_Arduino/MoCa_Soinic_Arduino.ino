@@ -13,7 +13,8 @@
  */
  
 SonarPairDetectTriggerInterface* triggerMethods[PAIR_NUMBER] = {
-    new MoveDetectTrigger(new Sonar(8, 9), new Sonar(11, 10))
+//    new MoveDetectTrigger(new Sonar(8, 9), new Sonar(11, 10))
+    new InRangeDetectTrigger(new Sonar(8, 9), new Sonar(11, 10))
 };
 
 void setup() {

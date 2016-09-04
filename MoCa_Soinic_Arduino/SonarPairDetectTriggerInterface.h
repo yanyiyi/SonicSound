@@ -1,8 +1,6 @@
 #ifndef SONAR_PAIR_DETECT_TRIGGER_INTERFACE_H
 #define SONAR_PAIR_DETECT_TRIGGER_INTERFACE_H
 
-#include "Sonar.h"
-
 class SonarPairDetectTriggerInterface
 {
     public:

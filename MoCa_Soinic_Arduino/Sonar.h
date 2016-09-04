@@ -20,6 +20,7 @@ class Sonar
         Sonar(byte triggerPin, byte echoPin) {
             this->init(triggerPin, echoPin, 20000);
             // 3000 µs = 50cm // 30000 µs = 5 m
+            // HC-SR40 range: 4cm ~ 400cm
         }
         Sonar(byte triggerPin, byte echoPin, unsigned long timeOut) {
             this->init(triggerPin, echoPin, timeOut);

@@ -1,5 +1,5 @@
-#ifndef TRIGGER_METHOD_ONE_H
-#define TRIGGER_METHOD_ONE_H
+#ifndef MOVE_DETECT_TRIGGER_H
+#define MOVE_DETECT_TRIGGER_H
 
 #include "SonarPairDetectTriggerInterface.h"
 #include "Sonar.h"

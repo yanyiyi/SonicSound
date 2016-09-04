@@ -1,17 +1,17 @@
-#ifndef TRIGGER_METHOD_TWO_H
-#define TRIGGER_METHOD_TWO_H
+#ifndef IN_RANGE_DETECT_TRIGGER_H
+#define IN_RANCE_DETECT_TRIGGER_H
 
-#include "TriggerMethod.h"
+#include "SonarPairDetectTriggerInterface.h"
 #include "Sonar.h"
 
-class TriggerMethodTwo : public TriggerMethod
+class InRangeDetectTrigger : public SonarPairDetectTriggerInterface
 {
     private:
         const int MIN_DISTANCE = 50;
         const int MAX_DISTANCE = 100;
         const int INTERVAL = 5;
         
-        Sonar *comingSensor, *leavingSensor;
+        Sonar *frontSonar, *backSonar;
         bool isComing;
         bool isProgressiveMode;
         int intervalCount;
