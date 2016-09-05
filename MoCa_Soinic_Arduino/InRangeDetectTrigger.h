@@ -7,52 +7,22 @@
 class InRangeDetectTrigger : public SonarPairDetectTriggerInterface
 {
     private:
-        const int MIN_DISTANCE = 50;
-        const int MAX_DISTANCE = 100;
-        const int INTERVAL = 5;
+        const int LEFT_BOUND = 50;
+        const int RIGHT_BOUND = 100;
         
         Sonar *frontSonar, *backSonar;
-        bool isComing;
-        bool isProgressiveMode;
-        int intervalCount;
-
-        void init(Sonar* comingSensor, Sonar* leavingSensor, bool enableProgressiveMode) {
-            this->comingSensor = comingSensor;
-            this->leavingSensor = leavingSensor;
-            isProgressiveMode = enableProgressiveMode;
-        }
-
-        void progressiveUpdate() {
-            int distance = isComing ?
-                    comingSensor -> update() -> getDistance() :
-                    leavingSensor -> update() -> getDistance();
-        }
-
-        void nonprogressiveUpdate() {
-            int distance = isComing ?
-                    comingSensor -> update() -> getDistance() :
-                    leavingSensor -> update() -> getDistance();
-            if ((MIN_DISTANCE < distance) && (distance < MAX_DISTANCE)) {
-                isTrigger = true;
-            }
-        }
+        bool isTrigger;
+        bool isToogle;
+        
     public:
-        TriggerMethodTwo(Sonar* comingSensor, Sonar* leavingSensor) :
-                TriggerMethod() {
-            init(comingSensor, leavingSensor, true);
-            reset();
-        }
-
-        TriggerMethodTwo(Sonar* comingSensor, Sonar* leavingSensor, bool enableProgressiveMode) :
-                TriggerMethod() {
-            init(comingSensor, leavingSensor, enableProgressiveMode);
+        InRangeDetectTrigger(Sonar* frontSonar, Sonar* backSonar) {
+            this->frontSonar = frontSonar;
+            this->backSonar = backSonar;
             reset();
         }
 
         void update() {
             if (isTrigger) return;
-            if (isProgressiveMode) progressvieUpdate();
-            else nonprogressiveUpdate();
         }
 
         void toggle() {
