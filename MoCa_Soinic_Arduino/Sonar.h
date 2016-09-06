@@ -33,6 +33,7 @@ class Sonar
             delayMicroseconds(10);
             digitalWrite(triggerPin, LOW);
             duration = pulseIn(echoPin, HIGH, timeOut);
+            if (duration == 0) duration = timeOut;
             return this;
         }
         
@@ -41,6 +42,7 @@ class Sonar
         }
         
         int getDistance() {
+            detect();
             return (int)(duration / 28.5 / 2);
         }
         

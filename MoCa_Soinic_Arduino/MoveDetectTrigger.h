@@ -10,7 +10,7 @@ class MoveDetectTrigger : public SonarPairDetectTriggerInterface
         const int TOLERANCE = 50;
         const byte OUTRANGE_LIMIT = 20;
         const int DELTA = 3;
-        const byte MOVE_COUNT_LIMIT = 10;
+        const byte MOVE_COUNT_LIMIT = 5;
 
         Sonar *frontSonar, *backSonar;
         bool _isTrigger;
@@ -34,8 +34,8 @@ class MoveDetectTrigger : public SonarPairDetectTriggerInterface
             if (_isTrigger) return;
             
             int newDistance = isToggle ?
-                    frontSonar -> detect() -> getDistance() :
-                    backSonar -> detect() -> getDistance();
+                    frontSonar -> getDistance() :
+                    backSonar -> getDistance();
             int delta = abs(newDistance - pastDistance);
             
             if (delta > TOLERANCE) {
@@ -45,6 +45,10 @@ class MoveDetectTrigger : public SonarPairDetectTriggerInterface
                 moveCount = 0;
                 return;
             } outRangeCount = 0;
+
+            Serial.print(getID()); Serial.print("    ");
+            Serial.print(newDistance);Serial.print("    ");
+            Serial.print(delta);Serial.print("    ");
             
             if (isToggle) {
                 Serial.print("is coming ");
@@ -81,15 +85,29 @@ class MoveDetectTrigger : public SonarPairDetectTriggerInterface
 
         void reset() {
             _isTrigger = false;
-            isToggle = true;
+            isToggle = false;
             initDistance(frontSonar);
             outRangeCount = 0;
             moveCount = 0;
         }
 
         byte getID() {
-            return isToggle ? frontSonar -> getTriggerPin() :
-                            backSonar -> getTriggerPin();
+            return !isToggle ?
+                    frontSonar -> getTriggerPin() :
+                    backSonar -> getTriggerPin();
+        }
+
+        int getDistance() {
+            return !isToggle ?
+                    frontSonar -> getDistance() :
+                    backSonar -> getDistance();
+        }
+
+        void debug() {
+            Serial.print(frontSonar -> getTriggerPin()); Serial.print("    ");
+            Serial.println(frontSonar -> getDistance());
+            Serial.print(backSonar -> getTriggerPin()); Serial.print("    ");
+            Serial.println(backSonar -> getDistance());
         }
 };
 

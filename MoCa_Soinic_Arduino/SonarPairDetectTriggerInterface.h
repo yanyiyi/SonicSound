@@ -9,6 +9,8 @@ class SonarPairDetectTriggerInterface
         virtual void toggle() = 0;
         virtual void reset() = 0;
         virtual byte getID() = 0;
+        virtual int getDistance() = 0;
+        virtual void debug() = 0;
 };
 
 #endif

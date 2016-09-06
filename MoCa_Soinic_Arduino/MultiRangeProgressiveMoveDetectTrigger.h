@@ -11,56 +11,27 @@ class MultiRangeProgressiveMoveDetectTrigger : public SonarPairDetectTriggerInte
         const int MAX_DISTANCE = 100;
         const int INTERVAL = 5;
         
-        Sonar *comingSensor, *leavingSensor;
-        bool isComing;
-        bool isProgressiveMode;
+        Sonar *frontSensor, *backSensor;
+        bool isToggle;
         int intervalCount;
 
-        void init(Sonar* comingSensor, Sonar* leavingSensor, bool enableProgressiveMode) {
-            this->comingSensor = comingSensor;
-            this->leavingSensor = leavingSensor;
-            isProgressiveMode = enableProgressiveMode;
-        }
-
-        void progressiveUpdate() {
-            int distance = isComing ?
-                    comingSensor -> update() -> getDistance() :
-                    leavingSensor -> update() -> getDistance();
-        }
-
-        void nonprogressiveUpdate() {
-            int distance = isComing ?
-                    comingSensor -> update() -> getDistance() :
-                    leavingSensor -> update() -> getDistance();
-            if ((MIN_DISTANCE < distance) && (distance < MAX_DISTANCE)) {
-                isTrigger = true;
-            }
-        }
     public:
-        TriggerMethodTwo(Sonar* comingSensor, Sonar* leavingSensor) :
-                TriggerMethod() {
-            init(comingSensor, leavingSensor, true);
-            reset();
+        TriggerMethodTwo(Sonar* frontSensor, Sonar* backSensor) {
+            this->frontSensor = frontSensor;
+            this->backSensor = backSensor;
+            this->reset();
         }
 
-        TriggerMethodTwo(Sonar* comingSensor, Sonar* leavingSensor, bool enableProgressiveMode) :
-                TriggerMethod() {
-            init(comingSensor, leavingSensor, enableProgressiveMode);
-            reset();
-        }
-
-        void update() {
+        void detect() {
             if (isTrigger) return;
-            if (isProgressiveMode) progressvieUpdate();
-            else nonprogressiveUpdate();
         }
 
         void toggle() {
-            
+            isToggle = !isToggle;
         }
 
         void reset() {
-            isComing = true;
+            isToggle = false;
         }
 
         byte getID() {
