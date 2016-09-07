@@ -26,56 +26,28 @@ void draw() {
   if ( port.available() > 0 ) {
     nowStat = port.readStringUntil( 10 ) ;
     if ( nowStat != null ) {
-      print( "\n Receiving:" + nowStat ) ;        
-      iLight_Vals = int( splitTokens( nowStat, "," ) ) ;
-      for (int i = 0; i < iLight_Counts; i++) {
-        if (Integer.parseInt(nowStat.trim()) == 2) {
-          randomSound(1);
-
-        } else if(Integer.parseInt(nowStat.trim()) == 6) {
-          randomSound(2);
-        } else if(Integer.parseInt(nowStat.trim()) == 10) {
-          randomSound(3);
-        } else if(Integer.parseInt(nowStat.trim()) == 14) {
-          randomSound(4);
-        } else if(Integer.parseInt(nowStat.trim()) == 18) {
-          randomSound(5);
-        } 
-      }
+      print( "\n Receiving:" + nowStat ) ;
+      int triggerPinNumber = Integer.parseInt(nowStat.trim());
+      randomSound((triggerPinNumber / 4) + 1);
+      //switch (triggerPinNumber) {
+      //  case 2:
+      //    randomSound(1);
+      //    break;
+      //  case 6:
+      //    randomSound(2);
+      //    break;
+      //  case 10:
+      //    randomSound(3);
+      //    break;
+      //  case 14:
+      //    randomSound(4);
+      //    break;
+      //  case 18:
+      //    randomSound(5);
+      //    break;
+      //}
     }
-  }
-    //if ( 0 < port.available() ) {
-    //      nowStat = port.readStringUntil( lf ) ;
-    //            if ( nowStat != null ) {
-    //                    print( "\n Receiving:" + nowStat ) ;        
-    //                    iLight_Vals = int( splitTokens( nowStat, "," ) ) ;
-                        
-                        
-    //                    // IF distance near down to 50 goto next page
-    //                    //if (iLight_Vals[0] > 1 && iLight_Vals[0] < 50){
-    //                    //    flyingSigL++; 
-    //                    //    print("LGO");
-    //                    //      if (flyingSigL == 10){
-    //                    //        flyingSigL = 0;
-    //                    //        backPage();
-                                
-    //                    //    }
-    //                    //}
-    //                    //if (iLight_Vals[1] > 1 && iLight_Vals[1] < 50){
-    //                    //    flyingSigR++; 
-    //                    //    print("RGO");
-    //                    //      if (flyingSigR == 10){
-    //                    //        flyingSigR = 0;
-    //                    //        forwardPage();
-    //                    //    }
-    //                    //}
-                        
-    //          }
-    //} //end of Arduino
-
-
-
- 
+  } 
 }//end of draw
 
 
