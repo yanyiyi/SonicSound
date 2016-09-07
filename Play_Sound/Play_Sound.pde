@@ -3,7 +3,7 @@ import processing.serial.*;
 
 Serial port; 
 Minim windSound01,windSound02,windSound03,windSound04,windSound05;
-
+AudioPlayer player1,player2,player3,player4,player5;
 
 // Sensor
 int iLight_Counts = 1 ; // how many sensor
@@ -18,7 +18,11 @@ void setup() {
 
  // Start arduino
   port = new Serial( this, Serial.list()[0], 9600 );
-
+  windSound01 = new Minim(this);
+  windSound02 = new Minim(this);
+  windSound03 = new Minim(this);
+  windSound04 = new Minim(this);
+  windSound05 = new Minim(this);
   noStroke();
 }
 
@@ -75,31 +79,29 @@ randomSound(5);
 
 
 void randomSound(int i){
-  if (i == 0) {
-    (new SoundFile(this, "frog01.wav")).play();
-  }
+
   if(i == 1){
-      windSound01 = new SoundFile(this, "w0"+int(random(1,6))+".wav");
-      windSound01.play();
+      player1 = windSound01.loadFile("w0"+int(random(1,6))+".wav");
+      player1.play();
     }
     
       if(i == 2){
-      windSound02 = new SoundFile(this, "forest0"+int(random(1,10))+".wav");
-      windSound02.play();
+      player2 = windSound02.loadFile("forest0"+int(random(1,10))+".wav");
+      player2.play();
     }
     
       if(i == 3){
-      windSound03 = new SoundFile(this, "thu0"+int(random(1,7))+".wav");
-      windSound03.play();
+      player3 = windSound03.loadFile("thu0"+int(random(1,7))+".wav");
+      player3.play();
     }
     
       if(i == 4){
-      windSound04 = new SoundFile(this, "fl0"+int(random(1,7))+".wav");
-      windSound04.play();
+      player4 = windSound04.loadFile("fl0"+int(random(1,7))+".wav");
+      player4.play();
     }
     
       if(i == 5){
-      windSound05 = new SoundFile(this, "frog0"+int(random(1,5))+".wav");
-      windSound05.play();
+      player5 = windSound05.loadFile("frog0"+int(random(1,5))+".wav");
+      player5.play();
     }
 }
