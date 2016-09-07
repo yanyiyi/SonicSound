@@ -18,7 +18,7 @@ void setup() {
 
  // Start arduino
   port = new Serial( this, Serial.list()[0], 9600 );
-  size(1024, 768);
+
   noStroke();
 }
 
@@ -29,11 +29,18 @@ void draw() {
       print( "\n Receiving:" + nowStat ) ;        
       iLight_Vals = int( splitTokens( nowStat, "," ) ) ;
       for (int i = 0; i < iLight_Counts; i++) {
-        if (Integer.parseInt(nowStat.trim()) == 11) {
-          (new SoundFile(this, "frog01.wav")).play();
-        } else {
-          (new SoundFile(this, "frog03.wav")).play();
-        }
+        if (Integer.parseInt(nowStat.trim()) == 2) {
+          randomSound(1);
+
+        } else if(Integer.parseInt(nowStat.trim()) == 6) {
+          randomSound(2);
+        } else if(Integer.parseInt(nowStat.trim()) == 10) {
+          randomSound(3);
+        } else if(Integer.parseInt(nowStat.trim()) == 14) {
+          randomSound(4);
+        } else if(Integer.parseInt(nowStat.trim()) == 18) {
+          randomSound(5);
+        } 
       }
     }
   }
