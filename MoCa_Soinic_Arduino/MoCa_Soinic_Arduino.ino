@@ -30,9 +30,9 @@ void loop() {
         triggerMethods[i] -> detect();
 //        triggerMethods[i] -> debug();
         if (triggerMethods[i] -> isTrigger()) {
-            Serial.print(triggerMethods[i] -> getID());
+//            Serial.print(triggerMethods[i] -> getID());
             triggerMethods[i] -> toggle();
-            Serial.println("    toggle");
+//            Serial.println("    toggle");
             delay(1000);
         }
 //        delay(100);

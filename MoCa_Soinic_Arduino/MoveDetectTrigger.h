@@ -40,24 +40,24 @@ class MoveDetectTrigger : public SonarPairDetectTriggerInterface
             
             if (abs(delta) > TOLERANCE) {
                 if (outRangeCount++ < OUTRANGE_LIMIT) return;
-                Serial.println("reset");
+//                Serial.println("reset");
                 pastDistance = newDistance;
                 moveCount = 0;
                 return;
             } outRangeCount = 0;
 
-            Serial.print(getID()); Serial.print("    ");
-            Serial.print(newDistance);Serial.print("    ");
-            Serial.print(delta);Serial.print("    ");
+//            Serial.print(getID()); Serial.print("    ");
+//            Serial.print(newDistance);Serial.print("    ");
+//            Serial.print(delta);Serial.print("    ");
             
             if (!isToggle) {
-                Serial.print("is coming ");
+//                Serial.print("is coming ");
                 if ( (newDistance < pastDistance) && (abs(delta) > DELTA) ) {
                     moveCount++;
                     pastDistance = newDistance;
                 }
             } else {
-                Serial.print("is leaving ");
+//                Serial.print("is leaving ");
                 if ( (newDistance > pastDistance) && (abs(delta) > DELTA) ) {
                     moveCount++;
                     pastDistance = newDistance;
@@ -66,9 +66,12 @@ class MoveDetectTrigger : public SonarPairDetectTriggerInterface
             
             if (moveCount > MOVE_COUNT_LIMIT) {
                 _isTrigger = true;
+                if (!isToggle) {
+                    Serial.println(getID());
+                }
             }
             
-            Serial.println(moveCount);
+//            Serial.println(moveCount);
         }
 
         bool isTrigger() {
