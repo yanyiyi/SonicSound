@@ -81,7 +81,7 @@ randomSound(5);
 void randomSound(int i){
 
   if(i == 1){
-      player1 = windSound01.loadFile("w0"+int(random(1,6))+".wav");
+      player1 = windSound01.loadFile("w0"+int(random(1,6))+".mp3");
       player1.play();
     }
     
