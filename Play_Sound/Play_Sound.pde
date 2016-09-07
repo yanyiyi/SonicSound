@@ -86,22 +86,22 @@ void randomSound(int i){
     }
     
       if(i == 2){
-      player2 = windSound02.loadFile("forest0"+int(random(1,10))+".wav");
+      player2 = windSound02.loadFile("forest0"+int(random(1,10))+".mp3");
       player2.play();
     }
     
       if(i == 3){
-      player3 = windSound03.loadFile("thu0"+int(random(1,7))+".wav");
+      player3 = windSound03.loadFile("thu0"+int(random(1,7))+".mp3");
       player3.play();
     }
     
       if(i == 4){
-      player4 = windSound04.loadFile("fl0"+int(random(1,7))+".wav");
+      player4 = windSound04.loadFile("fl0"+int(random(1,7))+".mp3");
       player4.play();
     }
     
       if(i == 5){
-      player5 = windSound05.loadFile("frog0"+int(random(1,5))+".wav");
+      player5 = windSound05.loadFile("frog0"+int(random(1,5))+".mp3");
       player5.play();
     }
 }
