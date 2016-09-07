@@ -24,6 +24,7 @@ class MultiRangeProgressiveMoveDetectTrigger : public SonarPairDetectTriggerInte
 
         void detect() {
             if (isTrigger) return;
+            
         }
 
         void toggle() {
@@ -35,7 +36,32 @@ class MultiRangeProgressiveMoveDetectTrigger : public SonarPairDetectTriggerInte
         }
 
         byte getID() {
-            
+            return !isToggle ?
+                    frontSonar -> getTriggerPin() :
+                    backSonar -> getTriggerPin();
+        }
+
+        int getDistance() {
+            return !isToggle ?
+                    frontSonar -> getDistance() :
+                    backSonar -> getDistance();
+        }
+
+        int getLeftBoundOfInterval(int interval) {
+            int delta = (MAX_DISTANCE - MIN_DISTANCE) / INTERVAL;
+            return MIN_DISTANCE + (delta * interval);
+        }
+
+        int getRightBoundOfInterval(int interval) {
+            int delta = (MAX_DISTANCE - MIN_DISTANCE) / INTERVAL;
+            return MIN_DISTANCE + (delta * (interval + 1));
+        }
+
+        void debug() {
+            Serial.print(frontSonar -> getTriggerPin()); Serial.print("    ");
+            Serial.println(frontSonar -> getDistance());
+            Serial.print(backSonar -> getTriggerPin()); Serial.print("    ");
+            Serial.println(backSonar -> getDistance());
         }
 };
 
