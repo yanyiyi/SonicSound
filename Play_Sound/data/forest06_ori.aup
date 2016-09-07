@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="forest06_ori_data" version="1.3.0" audacityversion="2.1.2" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="104.3390374924" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="forest06_ori" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="3.162278" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="325026">
+				<waveblock start="0">
+					<simpleblockfile filename="e00004f3.au" len="262144" min="-0.26181" max="0.24588" rms="0.031315"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0000a25.au" len="62882" min="-0.075684" max="0.045044" rms="0.016391"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="10">
+				<controlpoint t="0.000005000000" val="0.056338012218"/>
+				<controlpoint t="0.124593827128" val="0.225352108479"/>
+				<controlpoint t="0.718810541122" val="0.661971807480"/>
+				<controlpoint t="1.188433427988" val="0.845070421696"/>
+				<controlpoint t="2.348114434330" val="0.661971807480"/>
+				<controlpoint t="3.373617472997" val="0.450704216957"/>
+				<controlpoint t="4.849575117433" val="0.619718313217"/>
+				<controlpoint t="5.597138080200" val="0.718309879303"/>
+				<controlpoint t="6.574720416125" val="0.478873252869"/>
+				<controlpoint t="7.351035800536" val="0.070422530174"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="forest06_ori" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="3.162278" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="325026">
+				<waveblock start="0">
+					<simpleblockfile filename="e00001d0.au" len="262144" min="-0.182129" max="0.097931" rms="0.023055"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e000023f.au" len="62882" min="-0.043304" max="0.038544" rms="0.011207"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="10">
+				<controlpoint t="0.000005000000" val="0.056338012218"/>
+				<controlpoint t="0.124593827128" val="0.225352108479"/>
+				<controlpoint t="0.718810541122" val="0.661971807480"/>
+				<controlpoint t="1.188433427988" val="0.845070421696"/>
+				<controlpoint t="2.348114434330" val="0.661971807480"/>
+				<controlpoint t="3.373617472997" val="0.450704216957"/>
+				<controlpoint t="4.849575117433" val="0.619718313217"/>
+				<controlpoint t="5.597138080200" val="0.718309879303"/>
+				<controlpoint t="6.574720416125" val="0.478873252869"/>
+				<controlpoint t="7.351035800536" val="0.070422530174"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+</project>
