@@ -1,6 +1,7 @@
 // Include definition of "SonarPair class"
 #include "SonarPairDetectTriggerInterface.h"
 #include "MoveDetectTrigger.h"
+#include "InRangeDetectTrigger.h"
 #include "Sonar.h"
 // Using number of sonar pairs
 #define PAIR_NUMBER 5
@@ -13,11 +14,11 @@
  */
  
 SonarPairDetectTriggerInterface* triggerMethods[PAIR_NUMBER] = {
-    new MoveDetectTrigger(new Sonar(2, 3, 9000), new Sonar(4, 5, 20000)),
-    new MoveDetectTrigger(new Sonar(6, 7, 9000), new Sonar(8, 9, 9000)),
-    new MoveDetectTrigger(new Sonar(10, 11, 9000), new Sonar(12, 13, 9000)),
-    new MoveDetectTrigger(new Sonar(14, 15, 9000), new Sonar(16, 17, 9000)),
-    new MoveDetectTrigger(new Sonar(18, 19, 9000), new Sonar(20, 21, 9000))
+    new InRangeDetectTrigger(new Sonar(2, 3, 9000), new Sonar(4, 5, 15000)),
+    new InRangeDetectTrigger(new Sonar(6, 7, 9000), new Sonar(8, 9, 9000)),
+    new InRangeDetectTrigger(new Sonar(10, 11, 9000), new Sonar(12, 13, 9000)),
+    new InRangeDetectTrigger(new Sonar(14, 15, 9000), new Sonar(16, 17, 9000)),
+    new InRangeDetectTrigger(new Sonar(18, 19, 9000), new Sonar(20, 21, 9000))
 };
 
 void setup() {

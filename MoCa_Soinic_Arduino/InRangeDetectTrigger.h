@@ -11,8 +11,8 @@ class InRangeDetectTrigger : public SonarPairDetectTriggerInterface
         const int RIGHT_BOUND = 100;
         
         Sonar *frontSonar, *backSonar;
-        bool isTrigger;
-        bool isToogle;
+        bool _isTrigger;
+        bool isToggle;
         
     public:
         InRangeDetectTrigger(Sonar* frontSonar, Sonar* backSonar) {
@@ -22,23 +22,32 @@ class InRangeDetectTrigger : public SonarPairDetectTriggerInterface
         }
 
         void detect() {
-            if (isTrigger) return;
+            if (_isTrigger) return;
             int distance = getDistance();
             if ((LEFT_BOUND < distance) && (distance < RIGHT_BOUND)) {
-                isTrigger = true;
+                _isTrigger = true;
+                Serial.println(getID());
             }
+        }
+
+        bool isTrigger() {
+            return _isTrigger;
         }
 
         void toggle() {
             isToggle = !isToggle;
+            _isTrigger = false;
         }
 
         void reset() {
-            isToogle = false;
+            _isTrigger = false;
+            isToggle = false;
         }
 
         byte getID() {
-            
+            return !isToggle ?
+                    frontSonar -> getTriggerPin() :
+                    backSonar -> getTriggerPin();
         }
 
         int getDistance() {
