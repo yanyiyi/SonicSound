@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="fl03_ori_data" version="1.3.0" audacityversion="2.1.2" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="168.2704998561" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="fl03_ori" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.412538" pan="-0.4">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="201538">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000bf8.au" len="201538" min="-0.133599" max="0.113274" rms="0.016522"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.000005000000" val="0.140845060349"/>
+				<controlpoint t="0.772565601880" val="1.000000000000"/>
+				<controlpoint t="4.100540502287" val="0.323943674564"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="fl03_ori" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.412538" pan="-0.4">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="201538">
+				<waveblock start="0">
+					<simpleblockfile filename="e000003d.au" len="201538" min="-0.158304" max="0.092896" rms="0.018395"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.000005000000" val="0.140845060349"/>
+				<controlpoint t="0.772565601880" val="1.000000000000"/>
+				<controlpoint t="4.100540502287" val="0.323943674564"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+</project>

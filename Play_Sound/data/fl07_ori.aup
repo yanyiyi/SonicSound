@@ -1,0 +1,34 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="fl07_ori_data" version="1.3.0" audacityversion="2.1.2" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="60.1623366040" rate="48000.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="fl07_ori" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="48000" gain="7.079458" pan="-0.5">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="613540">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000021.au" len="262144" min="-0.185577" max="0.306854" rms="0.007524"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e000096d.au" len="262144" min="-0.010803" max="0.01062" rms="0.002422"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0000567.au" len="89252" min="-0.010864" max="0.010315" rms="0.002039"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="12">
+				<controlpoint t="0.116351863893" val="0.000000100000"/>
+				<controlpoint t="0.265947117469" val="0.126760542393"/>
+				<controlpoint t="0.980679995665" val="0.394366204739"/>
+				<controlpoint t="1.628926094495" val="0.591549277306"/>
+				<controlpoint t="2.243928803641" val="0.676056325436"/>
+				<controlpoint t="3.124878630256" val="0.746478915215"/>
+				<controlpoint t="4.238532184655" val="0.774647891521"/>
+				<controlpoint t="5.667997941049" val="0.816901445389"/>
+				<controlpoint t="8.194495557000" val="0.549295783043"/>
+				<controlpoint t="9.274905721717" val="0.436619699001"/>
+				<controlpoint t="10.255585717382" val="0.225352108479"/>
+				<controlpoint t="12.748839943650" val="0.028169035912"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+</project>
