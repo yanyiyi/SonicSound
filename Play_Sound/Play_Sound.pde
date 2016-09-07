@@ -1,8 +1,8 @@
-import processing.sound.*;
+import ddf.minim.*;
 import processing.serial.*;
 
 Serial port; 
-SoundFile windSound01,windSound02,windSound03,windSound04,windSound05;
+Minim windSound01,windSound02,windSound03,windSound04,windSound05;
 
 
 // Sensor
