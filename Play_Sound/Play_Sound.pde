@@ -1,107 +1,48 @@
-import ddf.minim.*;
-import processing.serial.*;
+import ddf.minim.Minim;
+import processing.serial.Serial;
 
-Serial port; 
-Minim windSound01,windSound02,windSound03,windSound04,windSound05;
-AudioPlayer player1,player2,player3,player4,player5;
-
-// Sensor
-int iLight_Counts = 1 ; // how many sensor
-int[] iLight_Vals = new int[iLight_Counts]; // storage sensor
-String nowStat ;
-int lf = 10 ;
-//
-
-
+Serial serialPort;
 
 void setup() {
-
- // Start arduino
-  port = new Serial( this, Serial.list()[0], 9600 );
-  windSound01 = new Minim(this);
-  windSound02 = new Minim(this);
-  windSound03 = new Minim(this);
-  windSound04 = new Minim(this);
-  windSound05 = new Minim(this);
+  serialPort = new Serial( this, Serial.list()[1], 9600 );
   noStroke();
 }
 
 void draw() {
-  if ( port.available() > 0 ) {
-    nowStat = port.readStringUntil( 10 ) ;
-    if ( nowStat != null ) {
-      print( "\n Receiving:" + nowStat ) ;
-      int triggerPinNumber = Integer.parseInt(nowStat.trim());
-      randomSound((triggerPinNumber / 4) + 1);
-      //switch (triggerPinNumber) {
-      //  case 2:
-      //    randomSound(1);
-      //    break;
-      //  case 6:
-      //    randomSound(2);
-      //    break;
-      //  case 10:
-      //    randomSound(3);
-      //    break;
-      //  case 14:
-      //    randomSound(4);
-      //    break;
-      //  case 18:
-      //    randomSound(5);
-      //    break;
-      //}
-    }
-  } 
-}//end of draw
-
-
-
-void keyPressed() {
-  if (key == 'a') {
-    randomSound(0);
+  if ( serialPort.available() > 0 ) {
+    String input = serialPort.readStringUntil(10);
+    if (input == null) return;
+    print("Received: " + input);
+    int triggerPin = Integer.parseInt(input.trim());
+    playRandomSound(triggerPin);
   }
-   if (key == 'b' || key == 'B') {
-randomSound(1);
-     }
-     
-        if (key == 'v' || key == 'V') {
-randomSound(2);
-     }   if (key == 'C' || key == 'c') {
-randomSound(3);
-     }
-     
-        if (key == 'x' || key == 'X') {
-randomSound(4);
-     }   if (key == 'Z' || key == 'z') {
-randomSound(5);
-     }
-  }// END of kPressed
+} //end of draw
 
-
-void randomSound(int i){
-
-  if(i == 1){
-      player1 = windSound01.loadFile("w0"+int(random(1,6))+".mp3");
-      player1.play();
-    }
-    
-      if(i == 2){
-      player2 = windSound02.loadFile("forest0"+int(random(1,10))+".mp3");
-      player2.play();
-    }
-    
-      if(i == 3){
-      player3 = windSound03.loadFile("thu0"+int(random(1,7))+".mp3");
-      player3.play();
-    }
-    
-      if(i == 4){
-      player4 = windSound04.loadFile("fl0"+int(random(1,7))+".mp3");
-      player4.play();
-    }
-    
-      if(i == 5){
-      player5 = windSound05.loadFile("frog0"+int(random(1,5))+".mp3");
-      player5.play();
-    }
+void playRandomSound(int i) {
+  String fileName = "";
+  switch (i) {
+  case 2:
+    fileName = "w0" + (int)(random(1, 6)); break;
+  case 6:
+    fileName = "forest0" + (int)(random(1, 10)); break;
+  case 10:
+    fileName = "thu0" + (int)(random(1, 7)); break;
+  case 14:
+    fileName = "fl0" + (int)(random(1, 7)); break;
+  case 18:
+    fileName = "frog0" + (int)(random(1, 5)); break;
+  default: return;
+  }
+  
+  println("play " + fileName);
+  (new Minim(this)).loadFile(fileName + ".mp3").play();
 }
+
+// for debug
+void keyPressed() {
+  if (key == 'b' || key == 'B') playRandomSound(2);
+  if (key == 'v' || key == 'V') playRandomSound(6);
+  if (key == 'c' || key == 'C') playRandomSound(10);
+  if (key == 'x' || key == 'X') playRandomSound(14);
+  if (key == 'z' || key == 'Z') playRandomSound(18);
+} // END of keyPressed
