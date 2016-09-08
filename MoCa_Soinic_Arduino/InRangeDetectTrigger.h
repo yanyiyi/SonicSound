@@ -59,8 +59,8 @@ class InRangeDetectTrigger : public SonarPairDetectTriggerInterface
         void debug() {
             Serial.print(frontSonar -> getTriggerPin()); Serial.print("    ");
             Serial.println(frontSonar -> getDistance());
-//            Serial.print(backSonar -> getTriggerPin()); Serial.print("    ");
-//            Serial.println(backSonar -> getDistance());
+            Serial.print(backSonar -> getTriggerPin()); Serial.print("    ");
+            Serial.println(backSonar -> getDistance());
         }
 };
 
