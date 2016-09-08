@@ -3,6 +3,7 @@
 #include "MoveDetectTrigger.h"
 #include "InRangeDetectTrigger.h"
 #include "SingleSonarInRangeDetectTrigger.h"
+#include "SingleSonarMoveDetectTrigger.h"
 #include "Sonar.h"
 // Using number of sonar pairs
 #define PAIR_NUMBER 5
@@ -19,7 +20,7 @@ SonarPairDetectTriggerInterface* triggerMethods[PAIR_NUMBER] = {
     new InRangeDetectTrigger(new Sonar(6, 7, 9000), new Sonar(8, 9, 9000)),
     new InRangeDetectTrigger(new Sonar(10, 11, 9000), new Sonar(12, 13, 9000)),
     new InRangeDetectTrigger(new Sonar(14, 15, 9000), new Sonar(16, 17, 9000)),
-    new SingleSonarInRangeDetectTrigger(new Sonar(18, 19, 9000))
+    new SingleSonarMoveDetectTrigger(new Sonar(18, 19, 9000))
 };
 
 void setup() {

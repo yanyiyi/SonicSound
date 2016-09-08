@@ -12,7 +12,6 @@ class SingleSonarInRangeDetectTrigger : public SonarPairDetectTriggerInterface
         
         Sonar* sonar;
         bool _isTrigger;
-        bool isToggle;
     public:
         SingleSonarInRangeDetectTrigger(Sonar* sonar) {
             this->sonar = sonar;
@@ -38,7 +37,6 @@ class SingleSonarInRangeDetectTrigger : public SonarPairDetectTriggerInterface
         
         void reset() {
             _isTrigger = false;
-            isToggle = false;
         }
         
         byte getID() {
